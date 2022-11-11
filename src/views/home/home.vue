@@ -1,8 +1,6 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
-
-    App.vue
+  <div>
+    home
   </div>
 </template>
 
