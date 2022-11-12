@@ -5,3 +5,12 @@ body {
 :root {
   --primary-color: #ff9854;
 }
+
+.top-page {
+  position: relative;
+  z-index: 9;
+  height: 100vh;
+  background-color: #fff;
+  /* 在容器中滚动，而不是页面滚动 */
+  overflow-y: auto;
+}
