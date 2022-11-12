@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="order">
     order
   </div>
 </template>
@@ -8,5 +8,5 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 </style>
