@@ -1,34 +1,27 @@
 <template>
   <div class="tabbar">
-    <div class="tabbar-item" @click="handleRouter('/home')">
-      <img src="@/assets/img/tabbar/tab_home.png" alt="">
-      <span class="text">首页</span>
-    </div>
+    <van-tabbar v-model="active" active-color="#ff9854">
+      <template v-for="(item,index) in tabbarData" :key="index">
+        <van-tabbar-item icon="home-o" :badge="item.text == '消息' ? 99 : null" :to="item.path">
+          <span>{{item.text}}</span>
+          <template #icon="props">
+            <img :src="props.active ? getAssetUrl(item.imageActive) : getAssetUrl(item.image)" alt="">
+          </template>
+        </van-tabbar-item>
+      </template>
+    </van-tabbar>
 
-    <div class="tabbar-item" @click="handleRouter('/favor')">
-      <img src="@/assets/img/tabbar/tab_favor.png" alt="">
-      <span class="text">收藏</span>
-    </div>
-
-    <div class="tabbar-item" @click="handleRouter('/order')">
-      <img src="@/assets/img/tabbar/tab_order.png" alt="">
-      <span class="text">订单</span>
-    </div>
-
-    <div class="tabbar-item" @click="handleRouter('/message')">
-      <img src="@/assets/img/tabbar/tab_message.png" alt="">
-      <span class="text">消息</span>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
-const router = useRouter();
+import { ref } from 'vue'
+import tabbarData from '@/assets/data/tabbar'
+import { getAssetUrl } from '@/utils/load_assets'
 
-const handleRouter = (link) => {
-  router.push(link)
-}
+const router = useRouter();
+const active = ref(0);
 
 </script>
 
