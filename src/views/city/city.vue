@@ -15,6 +15,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
+import { getCityAll } from '@/services'
 
 const router = useRouter();
 const searchValue = ref("");
@@ -22,13 +23,15 @@ const searchValue = ref("");
 // tab切换
 const active = ref();
 
-
-
 // 返回上一页
 const cancelClick = () => {
   router.back();
 };
 
+// 网络请求
+getCityAll().then(res => {
+  console.log("res: ", res);
+})
 </script>
 
 <style lang="less" scoped>
