@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <div class="location">
-      <span @click="cityClick" class="city-text">广州</span>
+      <span @click="cityClick" class="city-text">{{currentCity.cityName}}</span>
       <div class="position" @click="positionClick">
         <span>我的位置</span>
         <img src="@/assets/img/home/icon_location.png" alt="">
@@ -11,6 +11,8 @@
 </template>
 
 <script setup>
+import useCityStore from '@/stores/modules/city';
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 // 位置/城市点击事件
@@ -27,6 +29,9 @@ const cityClick = () => {
   router.push('/city');
 }
 
+// 获取当前城市
+const cityStore = useCityStore();
+const { currentCity } = storeToRefs(cityStore)
 
 </script>
 
