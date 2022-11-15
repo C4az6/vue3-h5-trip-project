@@ -1,10 +1,30 @@
 <template>
   <div class="search-box">
+    <!-- 位置信息 -->
     <div class="location">
       <span @click="cityClick" class="city-text">{{currentCity.cityName}}</span>
       <div class="position" @click="positionClick">
         <span>我的位置</span>
         <img src="@/assets/img/home/icon_location.png" alt="">
+      </div>
+    </div>
+
+    <!-- 日期范围 -->
+    <div class="section date-range">
+      <div class="start">
+        <div class="date">
+          <span>入住</span>
+          <span>{{startDate}}</span>
+        </div>
+      </div>
+
+      <div class="stay">共一晚</div>
+
+      <div class="end">
+        <div class="date">
+          <span>离店</span>
+          <span>{{endDate}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -14,6 +34,8 @@
 import useCityStore from '@/stores/modules/city';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { formatMonthDay } from '@/utils/format_date'
 const router = useRouter();
 // 位置/城市点击事件
 const positionClick = () => {
@@ -32,6 +54,13 @@ const cityClick = () => {
 // 获取当前城市
 const cityStore = useCityStore();
 const { currentCity } = storeToRefs(cityStore)
+
+// 日期范围处理
+const nowDate = new Date();
+const startDate = ref(formatMonthDay(nowDate));
+// 动态日期处理
+const endDate = ref(formatMonthDay(nowDate.setDate(nowDate.getDate() + 1)));
+// 日期格式化
 
 </script>
 
@@ -56,5 +85,32 @@ const { currentCity } = storeToRefs(cityStore)
       margin-left: 6px;
     }
   }
+}
+
+.date-range {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: space-between;
+  height: 45px;
+  .stay {
+    font-size: 12px;
+    color: #666;
+  }
+  .date {
+    display: flex;
+    flex-direction: column;
+    span:first-child {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.section {
+  display: flex;
+  height: 45px;
+  padding: 0 20px;
 }
 </style>
