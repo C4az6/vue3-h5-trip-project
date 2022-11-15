@@ -10,7 +10,7 @@
     </div>
 
     <!-- 日期范围 -->
-    <div class="section date-range">
+    <div class="section date-range" @click="showCalendar = true">
       <div class="start">
         <div class="date">
           <span>入住</span>
@@ -27,6 +27,10 @@
         </div>
       </div>
     </div>
+
+    <van-calendar v-model:show="showCalendar" type="range" color="#ff9854" :round="false" @confirm="onConfirm">
+
+    </van-calendar>
   </div>
 </template>
 
@@ -62,9 +66,25 @@ const startDate = ref(formatMonthDay(nowDate));
 const endDate = ref(formatMonthDay(nowDate.setDate(nowDate.getDate() + 1)));
 // 日期格式化
 
+// 是否显示日历组件
+const showCalendar = ref(false);
+// 监听日历点击事件
+const onConfirm = (date) => {
+  // 设置日期
+  const selectStartDate = date[0];
+  const selectEndDate = date[1];
+  startDate.value = formatMonthDay(selectStartDate)
+  endDate.value = formatMonthDay(selectEndDate)
+  // 隐藏日历组件
+  showCalendar.value = false;
+}
+
 </script>
 
 <style lang="less" scoped>
+.search-box {
+  --van-calendar-popup-height: 100%;
+}
 .location {
   display: flex;
   align-items: center;
