@@ -16,6 +16,7 @@ import HomeSearchBox from './components/home-search-box.vue';
 import useHomeStore from '@/stores/modules/home'
 const homeStore = useHomeStore();
 homeStore.fetchHotSuggestData();
+homeStore.fetchcategories();
 
 </script>
 
