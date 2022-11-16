@@ -9,3 +9,10 @@ export function getHomeCategories() {
     url: '/home/categories'
   })
 }
+
+export function getHouseListData(page) {
+  return hyRequest.get({
+    url: '/home/houseList',
+    params: { page }
+  })
+}

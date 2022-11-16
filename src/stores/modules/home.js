@@ -1,10 +1,13 @@
 import { defineStore } from "pinia";
-import { getHotSuggestData, getHomeCategories } from '@/services'
+import { getHotSuggestData, getHomeCategories, getHouseListData } from '@/services'
 const useHomeStore = defineStore('home', {
   state: () => ({
     // 热门建议
     hotSuggests: [],
-    categories: []
+    // 分类列表
+    categories: [],
+    // 房屋信息列表
+    houseList: []
   }),
   actions: {
     async fetchHotSuggestData() {
@@ -15,6 +18,10 @@ const useHomeStore = defineStore('home', {
     async fetchcategories() {
       const { data } = await getHomeCategories();
       this.categories = data;
+    },
+    async fetchHouseListData(page = 1) {
+      const { data } = await getHouseListData(page);
+      this.houseList = [...this.houseList, data];
     }
   }
 })
