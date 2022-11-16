@@ -10,8 +10,6 @@
     <HomeSearchBox />
     <HomeCategories />
     <HomeContent />
-
-    <van-button @click="addClick" type="success">加载更多</van-button>
   </div>
 </template>
 
@@ -22,13 +20,30 @@ import HomeContent from './components/home-content.vue'
 import useHomeStore from '@/stores/modules/home'
 import { ref } from 'vue';
 const homeStore = useHomeStore();
+
+/* 数据初始化 */
 homeStore.fetchHotSuggestData();
 homeStore.fetchcategories();
 homeStore.fetchHouseListData();
 
-const addClick = () => {
-  homeStore.fetchHouseListData();
-};
+
+// 监听window窗口的滚动
+window.addEventListener("scroll", () => {
+  /* 
+    scrollTop: 距离顶部的值
+    scrollHeight: 总共可滚动的值
+    clientHeight: 客户端的高度
+
+    判断是否触底的计算公式：scrollTop+clientHeight >= scrollHeight，为true说明触底了
+  */
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight;
+  const clientHeight = document.documentElement.clientHeight;
+  // console.log(scrollTop, clientHeight, scrollHeight);
+  if (clientHeight + scrollTop >= scrollHeight) {
+    homeStore.fetchHouseListData();
+  }
+})
 
 </script>
 
