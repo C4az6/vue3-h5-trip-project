@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <!-- 位置信息 -->
-    <div class="location">
+    <div class="location bottom-gray-line">
       <span @click="cityClick" class="city-text">{{currentCity.cityName}}</span>
       <div class="position" @click="positionClick">
         <span>我的位置</span>
@@ -29,8 +29,13 @@
     </div>
 
     <van-calendar v-model:show="showCalendar" type="range" color="#ff9854" :round="false" @confirm="onConfirm" :showConfirm="false">
-
     </van-calendar>
+
+    <div class="section price-counter bottom-gray-line">
+      <div class="start">价格不限</div>
+      <div class="end">人数不限</div>
+    </div>
+    <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
   </div>
 </template>
 
@@ -83,7 +88,7 @@ const onConfirm = (date) => {
   stayCount.value = getDiffDays(selectStartDate, selectEndDate);
   // 隐藏日历组件
   showCalendar.value = false;
-}
+};
 
 </script>
 
@@ -121,22 +126,34 @@ const onConfirm = (date) => {
   height: 45px;
   .stay {
     font-size: 12px;
-    color: #666;
+    color: lightpink;
   }
   .date {
     display: flex;
     flex-direction: column;
-    span:first-child {
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 4px;
+    span:last-child {
+      font-size: 14px;
+      color: #000;
+      margin-top: 4px;
     }
   }
 }
 
+.price-counter {
+  .start {
+    border-right: 1px solid var(--line-color);
+  }
+}
+.keyword {
+}
+
 .section {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 45px;
   padding: 0 20px;
+  color: #666;
+  font-size: 12px;
 }
 </style>
