@@ -7,7 +7,8 @@ const useHomeStore = defineStore('home', {
     // 分类列表
     categories: [],
     // 房屋信息列表
-    houseList: []
+    houseList: [],
+    currentPage: 1
   }),
   actions: {
     async fetchHotSuggestData() {
@@ -19,9 +20,9 @@ const useHomeStore = defineStore('home', {
       const { data } = await getHomeCategories();
       this.categories = data;
     },
-    async fetchHouseListData(page = 1) {
-      const { data } = await getHouseListData(page);
-      this.houseList = [...this.houseList, data];
+    async fetchHouseListData() {
+      const { data } = await getHouseListData(this.currentPage++);
+      this.houseList = [...this.houseList, ...data];
     }
   }
 })

@@ -11,6 +11,7 @@
     <HomeCategories />
     <HomeContent />
 
+    <van-button @click="addClick" type="success">加载更多</van-button>
   </div>
 </template>
 
@@ -19,10 +20,15 @@ import HomeSearchBox from './components/home-search-box.vue';
 import HomeCategories from './components/home-categories.vue';
 import HomeContent from './components/home-content.vue'
 import useHomeStore from '@/stores/modules/home'
+import { ref } from 'vue';
 const homeStore = useHomeStore();
 homeStore.fetchHotSuggestData();
 homeStore.fetchcategories();
 homeStore.fetchHouseListData();
+
+const addClick = () => {
+  homeStore.fetchHouseListData();
+};
 
 </script>
 
