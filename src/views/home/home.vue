@@ -8,11 +8,14 @@
     </div>
 
     <HomeSearchBox></HomeSearchBox>
+
+    <HomeCategories></HomeCategories>
   </div>
 </template>
 
 <script setup>
 import HomeSearchBox from './components/home-search-box.vue';
+import HomeCategories from './components/home-categories.vue';
 import useHomeStore from '@/stores/modules/home'
 const homeStore = useHomeStore();
 homeStore.fetchHotSuggestData();
