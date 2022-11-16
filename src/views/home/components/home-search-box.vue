@@ -47,6 +47,11 @@
         </div>
       </template>
     </div>
+
+    <!-- 搜索按钮 -->
+    <div class="section search-btn">
+      <div class="btn" @click="onSearchClick">开始搜索</div>
+    </div>
   </div>
 </template>
 
@@ -105,6 +110,18 @@ const onConfirm = (date) => {
   // 隐藏日历组件
   showCalendar.value = false;
 };
+
+/* 搜索点击事件 */
+const onSearchClick = () => {
+  router.push({
+    path: '/search',
+    query: {
+      startDate: startDate.value,
+      endDate: endDate.value,
+      currentCity: currentCity.value.cityName
+    }
+  });
+}
 
 </script>
 
@@ -176,14 +193,64 @@ const onConfirm = (date) => {
 
 .hot-suggest {
   justify-content: flex-start;
-  height: auto;
+  min-height: 84px;
   margin: 10px 0;
+  animation: animate-opacity 0.6s linear;
   .item {
     padding: 3px 6px;
     border-radius: 14px;
     margin: 5px 3px;
     font-size: 12px;
     line-height: 1;
+  }
+}
+
+.search-btn {
+  .btn {
+    margin-top: 10px;
+    width: 342px;
+    height: 38px;
+    max-height: 50px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 20px;
+    color: #fff;
+    background-image: var(--theme-linear-gradient);
+    animation: heart-btn 0.6s linear infinite;
+  }
+}
+
+@keyframes heart-btn {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes animate-opacity {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  75% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>
