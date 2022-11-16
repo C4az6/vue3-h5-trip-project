@@ -2,15 +2,15 @@
   <div class="house-item">
     <div class="item-inner">
       <div class="cover">
-        <img :src="itemData.image.url" alt="">
+        <img :src="itemData?.image?.url" alt="">
       </div>
 
       <div class="infos">
-        <div class="summary">{{itemData.summaryText}}</div>
-        <div class="name">{{itemData.houseName}}</div>
+        <div class="summary">{{itemData?.summaryText}}</div>
+        <div class="name">{{itemData?.houseName}}</div>
         <div class="price">
           <van-rate :model-value="itemScore" color="#ffffff" :size="15" readonly allow-half />
-          <div class="new">￥{{itemData.finalPrice}}</div>
+          <div class="new">￥{{itemData?.finalPrice}}</div>
         </div>
       </div>
     </div>
