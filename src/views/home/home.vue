@@ -33,6 +33,9 @@ const addClick = () => {
 </script>
 
 <style lang="less" scoped>
+.home {
+  background: #f6f5f7;
+}
 .nav-bar-wrap {
   display: flex;
   align-items: center;
