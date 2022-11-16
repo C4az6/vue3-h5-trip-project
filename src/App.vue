@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app" :style="{marginBottom: !route.meta.hideTabBar ? '52px': ''}">
     <router-view></router-view>
 
     <!-- <tab-bar></tab-bar> -->

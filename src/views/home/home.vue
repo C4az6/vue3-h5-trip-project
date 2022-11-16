@@ -7,15 +7,17 @@
       <img src="@/assets/img/home/banner.webp" alt="">
     </div>
 
-    <HomeSearchBox></HomeSearchBox>
+    <HomeSearchBox />
+    <HomeCategories />
+    <HomeContent />
 
-    <HomeCategories></HomeCategories>
   </div>
 </template>
 
 <script setup>
 import HomeSearchBox from './components/home-search-box.vue';
 import HomeCategories from './components/home-categories.vue';
+import HomeContent from './components/home-content.vue'
 import useHomeStore from '@/stores/modules/home'
 const homeStore = useHomeStore();
 homeStore.fetchHotSuggestData();
