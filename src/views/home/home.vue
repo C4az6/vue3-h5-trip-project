@@ -7,12 +7,26 @@
       <img src="@/assets/img/home/banner.webp" alt="">
     </div>
 
-    <HomeSearchBox></HomeSearchBox>
+    <HomeSearchBox :hotSuggests="hotSuggests"></HomeSearchBox>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import HomeSearchBox from './components/home-search-box.vue'
+import hyRequest from '@/services/request'
+
+
+const hotSuggests = ref([]);
+// 发送网络请求
+// 1.热门建议
+hyRequest.get({
+  url: "/home/hotSuggests"
+}).then(res => {
+  console.log("response: ", res);
+  hotSuggests.value = res.data;
+})
+
 
 </script>
 

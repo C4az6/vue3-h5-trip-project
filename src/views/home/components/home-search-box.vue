@@ -31,11 +31,22 @@
     <van-calendar v-model:show="showCalendar" type="range" color="#ff9854" :round="false" @confirm="onConfirm" :showConfirm="false">
     </van-calendar>
 
+    <!-- 价格人数宣而战 -->
     <div class="section price-counter bottom-gray-line">
       <div class="start">价格不限</div>
       <div class="end">人数不限</div>
     </div>
+    <!-- 关键字 -->
     <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
+
+    <!-- 热门建议 -->
+    <div class="section hot-suggest">
+      <template v-for="(item,index) in hotSuggests" :key="index">
+        <div class="item" :style="{color: item.tagText.color, background: item.tagText.background.color}">
+          {{item.tagText.text}}
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -46,6 +57,10 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { formatMonthDay, getDiffDays } from '@/utils/format_date'
 const router = useRouter();
+
+const props = defineProps({
+  hotSuggests: Array
+})
 
 /* 城市相关数据 */
 // 位置/城市点击事件
@@ -151,9 +166,23 @@ const onConfirm = (date) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   height: 45px;
   padding: 0 20px;
   color: #666;
   font-size: 12px;
+}
+
+.hot-suggest {
+  justify-content: flex-start;
+  height: auto;
+  margin: 10px 0;
+  .item {
+    padding: 3px 6px;
+    border-radius: 14px;
+    margin: 5px 3px;
+    font-size: 12px;
+    line-height: 1;
+  }
 }
 </style>
