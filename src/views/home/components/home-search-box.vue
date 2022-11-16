@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="stay">共一晚</div>
+      <div class="stay">共{{stayCount}}晚</div>
 
       <div class="end">
         <div class="date">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <van-calendar v-model:show="showCalendar" type="range" color="#ff9854" :round="false" @confirm="onConfirm">
+    <van-calendar v-model:show="showCalendar" type="range" color="#ff9854" :round="false" @confirm="onConfirm" :showConfirm="false">
 
     </van-calendar>
   </div>
@@ -39,8 +39,10 @@ import useCityStore from '@/stores/modules/city';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import { formatMonthDay } from '@/utils/format_date'
+import { formatMonthDay, getDiffDays } from '@/utils/format_date'
 const router = useRouter();
+
+/* 城市相关数据 */
 // 位置/城市点击事件
 const positionClick = () => {
   // 获取用户当前的经纬度
@@ -50,21 +52,24 @@ const positionClick = () => {
     console.log("获取失败: ", err);
   })
 };
-
 const cityClick = () => {
   router.push('/city');
 }
-
 // 获取当前城市
 const cityStore = useCityStore();
 const { currentCity } = storeToRefs(cityStore)
 
+
+/* 日期相关数据 */
 // 日期范围处理
 const nowDate = new Date();
+const newDate = new Date().setDate(nowDate.getDate() + 1);
+console.log("nowDate: ", nowDate);
+console.log("newDate: ", newDate);
 const startDate = ref(formatMonthDay(nowDate));
 // 动态日期处理
-const endDate = ref(formatMonthDay(nowDate.setDate(nowDate.getDate() + 1)));
-// 日期格式化
+const endDate = ref(formatMonthDay(newDate));
+const stayCount = ref(getDiffDays(nowDate, newDate));
 
 // 是否显示日历组件
 const showCalendar = ref(false);
@@ -75,6 +80,7 @@ const onConfirm = (date) => {
   const selectEndDate = date[1];
   startDate.value = formatMonthDay(selectStartDate)
   endDate.value = formatMonthDay(selectEndDate)
+  stayCount.value = getDiffDays(selectStartDate, selectEndDate);
   // 隐藏日历组件
   showCalendar.value = false;
 }
