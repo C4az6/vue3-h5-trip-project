@@ -56,11 +56,12 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { formatMonthDay, getDiffDays } from '@/utils/format_date'
+import useHomeStore from '@/stores/modules/home'
 const router = useRouter();
 
-const props = defineProps({
-  hotSuggests: Array
-})
+const homeStore = useHomeStore();
+const { hotSuggests } = storeToRefs(homeStore)
+
 
 /* 城市相关数据 */
 // 位置/城市点击事件
